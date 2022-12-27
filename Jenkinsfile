@@ -1,9 +1,8 @@
 
 
-pipeline{ 
+pipeline { 
     agent any
         // environment {
-           agent any
            parameters {
            // string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prod')
             choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
@@ -13,7 +12,7 @@ pipeline{
            //   maven 'maven-3.8'
            // }
             // SERVER_CREDENTIALS = credentials('server-credentials') // you can also use wrapper syntax and use withCredentials() to the stage that you want
-        }
+        
 
     stages {
         stage("build") {
@@ -36,7 +35,7 @@ pipeline{
             }
             steps {
                 echo 'testing the application...'
-                echo "deploying version ${VERSION}"
+                echo "deploying version ${params.VERSION}"
 
             }
         }
@@ -47,5 +46,4 @@ pipeline{
             }
         }
     }
-    
 }
