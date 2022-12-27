@@ -1,4 +1,4 @@
-
+   gv = load "script.groovy"
 
 pipeline { 
     agent any
@@ -16,11 +16,14 @@ pipeline {
 
     stages {
         stage("build") {
-        
+
             steps {
+                script {
+                 
+                    gv.buildApp()
+                }
                 // here goes the script that actually executes some command in the Jenkins agent
-                echo 'building the application...'
-                echo "building version ${VERSION}"
+
             }
         }
         stage("test") {
@@ -34,8 +37,9 @@ pipeline {
                 }
             }
             steps {
-                echo 'testing the application...'
-                echo "deploying version ${params.VERSION}"
+                script {
+                    gv.testApp()
+                }
 
             }
         }
@@ -43,6 +47,9 @@ pipeline {
             steps {
                 echo 'deploying the application...'
 
+            }
+            script {
+                gv.deployApp()
             }
         }
     }
