@@ -58,8 +58,8 @@ pipeline {
                 }
                   script {
                 gv.deployApp()
-            }
-                echo 'deploying the application...'
+                
+                }
 
             }
           
