@@ -45,6 +45,7 @@ pipeline {
             }
             steps {
                 script {
+
                     gv.testApp()
                 }
 
@@ -52,6 +53,9 @@ pipeline {
         }
         stage ("deploy") {
             steps {
+                expression {
+                    env.BRANCH_NAME == 'feature/jenkins-jobs'
+                }
                   script {
                 gv.deployApp()
             }
