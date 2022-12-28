@@ -22,7 +22,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'docker build -t aamdevsecops/devops-bootcamp:jma-2.0 .'
                         sh 'echo $PASS | docker login -u $USER --password-stdin'
-                        sh 'docker push -t aamdevsecops/devops-bootcamp:jma-2.0'
+                        sh 'docker push aamdevsecops/devops-bootcamp:jma-2.0'
                     }
                 }
             }
