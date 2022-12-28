@@ -34,6 +34,7 @@ pipeline {
             when {
                 expression {
                     BRANCH_NAME == 'main'
+                    echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildJar()"
                 }
             }
         }
@@ -41,6 +42,7 @@ pipeline {
             when {
                 expression {
                     BRANCH_NAME == 'main'
+                    echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildJar()"
                 }
             }
             steps {
@@ -54,6 +56,7 @@ pipeline {
             when {
                 expression {
                     BRANCH_NAME == 'main'
+                    echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildImage()"
                 }
             }
             steps {
