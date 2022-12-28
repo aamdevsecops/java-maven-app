@@ -1,7 +1,4 @@
 def gv
-node('slave') {
-    gv = load 'script.groovy'
-}
 
 pipeline { 
     agent any
@@ -18,6 +15,12 @@ pipeline {
         
 
     stages {
+        stage("init")
+            steps {
+                script {
+                    gv = load 'script.groovy'
+                }
+            }
 
         
         stage("build") {
