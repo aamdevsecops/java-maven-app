@@ -1,11 +1,10 @@
 def gv
-pipeline { 
-    agent any
-           parameters {
-            choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-            booleanParam(name: 'executeTests', defaultValue: true, description: '')
-           }
 
+pipeline {
+    agent any
+    parameters {
+        string(name: 'VERSION', defaultValue: '1.1', description: 'version to deploy on prod')
+    }
     stages {
         stage("init") {
             steps {
@@ -14,39 +13,29 @@ pipeline {
                 }
             }
         }
-        stage("build") {
+        stage("build jar") {
             steps {
                 script {
-                 
-                    gv.buildApp()
+                    echo "building jar"
+                    gv.buildJar()
                 }
-
             }
         }
-        stage("test") {
-            when {
-             
-                expression {
-                    params.executeTests
-                }
-            }
+        stage("build image") {
             steps {
                 script {
-                    gv.testApp()
+                    echo "building image"
+                    gv.buildImage()
                 }
             }
         }
-        stage ("deploy") {
+        stage("deploy") {
             steps {
-                expression {
-                    env.BRANCH_NAME == 'feature/jenkins-jobs'
-                }
-                  script {
-                gv.deployApp()
-                
+                script {
+                    echo "deploying $VERSION"
+                    gv.deployApp()
                 }
             }
-          
         }
-    }
+    }   
 }
