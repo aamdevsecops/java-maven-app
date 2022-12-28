@@ -15,14 +15,18 @@ pipeline {
         
 
     stages {
-        stage("init")
-            steps {
-                script {
-                    gv = load 'script.groovy'
-                }
-            }
-
         
+        
+        stage("init") {
+            steps {
+                script [
+                    gv load = 'script.groovy'
+                    
+                ]
+            }
+            
+        }
+            
         stage("build") {
 
             steps {
@@ -31,7 +35,6 @@ pipeline {
                     gv.buildApp()
                 }
                 // here goes the script that actually executes some command in the Jenkins agent
-
             }
         }
         stage("test") {
