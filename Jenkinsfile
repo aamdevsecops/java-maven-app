@@ -25,6 +25,12 @@ pipeline {
         }
         
         stage('build') {
+            steps {
+                script {
+                    gv.buildJar()   
+                }
+              
+            }
             when {
                 expression {
                     BRANCH_NAME == 'main'
@@ -48,6 +54,11 @@ pipeline {
             }
         }
         stage("deploy") {
+            steps {
+                script {
+                    deployApp()
+                }
+            }
             when {
                 expression {
                 BRANCH_NAME == main {
@@ -56,4 +67,4 @@ pipeline {
             }
         }
     }   
-}
+}}
