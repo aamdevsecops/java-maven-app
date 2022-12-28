@@ -1,7 +1,7 @@
 def buildJar() {
     echo "building the application..."
 } 
-def buildImage()) {
+def buildImage() {
     echo "building the image"
     
     }
