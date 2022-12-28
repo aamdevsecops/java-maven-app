@@ -1,6 +1,6 @@
 def gv
 node('slave') {
-    gv = load 'pipeline.groovy'
+    gv = load 'script.groovy'
 }
 
 pipeline { 
