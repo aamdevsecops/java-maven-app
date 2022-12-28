@@ -6,4 +6,4 @@ COPY ./target/java-maven-app-1.1.1-SNAPSHOT.jar /usr/app
 
 WORKDIR /usr/app
 
-ENTRYPOINT ["java", "-jar", "java-maven-app-1.1.*-SNAPSHOT.jar"] 
+CMD "java", "-jar", "java-maven-app-1.1.*-SNAPSHOT.jar"
