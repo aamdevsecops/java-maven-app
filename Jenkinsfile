@@ -1,39 +1,52 @@
-
-pipeline {
+def gv
+pipeline { 
     agent any
-    tools {
-        maven 'maven-3.8'
+           parameters {
+            choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
+            booleanParam(name: 'executeTests', defaultValue: true, description: '')
+           }
 
-    }
     stages {
-        stage("build jar") {
+        stage("init") {
             steps {
                 script {
-                    echo "building the application..."
-                    sh 'mvn package'
-           
+                    gv = load "script.groovy"
                 }
             }
         }
-        stage("build image") {
+        stage("build") {
             steps {
                 script {
-                    echo "building image"
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh 'docker build -t aamdevsecops/devops-bootcamp:jma-1.3 .'
-                        sh 'echo $PASS | docker login -u $USER --password-stdin'
-                        sh 'docker push aamdevsecops/devops-bootcamp:jma-1.3'
-                    }
+                 
+                    gv.buildApp()
                 }
-            }
-        }
 
-        stage("deploy") {
+            }
+        }
+        stage("test") {
+            when {
+             
+                expression {
+                    params.executeTests
+                }
+            }
             steps {
                 script {
-                    echo "deploying"
+                    gv.testApp()
                 }
             }
         }
-    }   
+        stage ("deploy") {
+            steps {
+                expression {
+                    env.BRANCH_NAME == 'feature/jenkins-jobs'
+                }
+                  script {
+                gv.deployApp()
+                
+                }
+            }
+          
+        }
+    }
 }
