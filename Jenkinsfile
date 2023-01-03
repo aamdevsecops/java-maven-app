@@ -34,7 +34,7 @@ pipeline {
 
             steps {
                 script {
-                  buildImage 'aamdevsecops/aamdevsecops-bootcamp:jma-4.0'
+                  buildImage 'aamdevsecops/aamdevsecops-bootcamp:jma-4.0.1'
 
                 }
             }
