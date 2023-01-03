@@ -1,4 +1,9 @@
-def gv
+#!/usr/bin/ env groovy
+
+@Library('jenkins-shared-library') // the name of the library that we created in Jenkins
+def gv  
+
+// if we don't have a variable definition, we should put an _ after (jenkins-shared-library_)
 
 pipeline {
     agent any
@@ -14,61 +19,30 @@ pipeline {
             }
         }
 
-        stage('test') {
-            steps {
-                script {
-                    echo "Testing the application..."
-                    echo "Executing pipeline for $BRANCH_NAME"
-                }
-            }
-
-        }
         
-        stage('build') {
+        stage('build jar') {
             steps {
                 script {
-                    gv.buildJar()   
+                    buildJar()
+
                 }
               
             }
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
-        }
-        stage("build jar") {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
-            steps {
-                script {
-                  
-                    gv.buildJar()
-                }
-            }
+
         }
         stage("build image") {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
+
             steps {
                 script {
-                   
-                    gv.buildImage()
+                  buildImage 'aamdevsecops/aamdevsecops-bootcamp:jma-4.0'
+
                 }
             }
         }
+        
+
         stage('deploy') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
+
             steps {
                 script {
                     gv.deployApp()
