@@ -1,3 +1,6 @@
+def BRANCH_NAME
+BRANCH_NAME == 'feature/jenkins-jobs'
+
 def buildJar() {
     echo "building the application..."
     sh 'mvn package'
