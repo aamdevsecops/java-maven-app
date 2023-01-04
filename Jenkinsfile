@@ -34,7 +34,7 @@ pipeline {
             }
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    BRANCH_NAME == '*/feature/jenkins-jobs'
                     echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildJar()"
                 }
             }
@@ -42,7 +42,7 @@ pipeline {
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    BRANCH_NAME == '*/feature/jenkins-jobs'
                     echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildJar()"
                 }
             }
@@ -56,7 +56,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    BRANCH_NAME == '*/feature/jenkins-jobs'
                     echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildImage()"
                 }
             }
@@ -70,7 +70,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    BRANCH_NAME == '*/feature/jenkins-jobs'
                 }
             }
             steps {
