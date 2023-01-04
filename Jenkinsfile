@@ -11,6 +11,15 @@ pipeline {
         maven 'maven-3.8'
     }
     stages {
+        stage("Check script") {
+            steps{
+                checkScript {
+                    script {
+                        gv.buildImage()
+                    }
+                }
+            }  
+        }
         stage("init") {
             steps {
                 script {
@@ -44,19 +53,7 @@ pipeline {
                 }
             }
         }
-        stage("build jar") {
-            when {
-                expression {
-                    branch == 'feature/jenkins-jobs'
-                }
-            }
-            steps {
-                script {
-                  
-                    gv.buildJar()
-                }
-            }
-        }
+        
         stage("build image") {
             when {
                 expression {
