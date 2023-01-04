@@ -1,11 +1,7 @@
 @Library('pipeline-utility-steps') _
 def gv
-def branch_name = env.branch
 
 pipeline {
-    parameters {
-        string(name: 'branch', defaultValue: BRANCH_NAME)
-    }
     agent any
     tools {
         maven 'maven-3.8'
