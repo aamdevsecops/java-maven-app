@@ -7,15 +7,6 @@ pipeline {
         maven 'maven-3.8'
     }
     stages {
-        stage("Check script") {
-            steps{
-                checkScript {
-                    script {
-                        gv.buildImage()
-                    }
-                }
-            }  
-        }
         stage("init") {
             steps {
                 script {
@@ -26,8 +17,8 @@ pipeline {
 
         stage('test') {
             steps {
-                script {
-                    echo "Testing the application for $branch"
+                script {BRANCH_NAME_NAME
+                    echo "Testing the application for $BRANCH_NAME"
 
     
                 }
@@ -38,14 +29,14 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    print("Branch: ${branch}")
+                    print("BRANCH_NAME: ${BRANCH_NAME}")
                     gv.buildJar()   
                 }
               
             }
             when {
                 expression {
-                    branch == 'feature/jenkins-jobs'
+                    env.BRANCH_NAME_NAME == 'feature/jenkins-jobs'
                 }
             }
         }
@@ -53,7 +44,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    branch == 'feature/jenkins-jobs'
+                    env.BRANCH_NAME == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -66,7 +57,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    branch == 'feature/jenkins-jobs'
+                    env.BRANCH_NAME == 'feature/jenkins-jobs'
                 }
             }
             steps {
