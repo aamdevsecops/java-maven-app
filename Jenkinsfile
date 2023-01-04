@@ -29,7 +29,7 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    print("BRANCH_NAME: ${BRANCH_NAME}")
+                    print("Branch: ${GIT_BRANCH")
                     gv.buildJar()   
                 }
               
