@@ -1,6 +1,6 @@
 @Library('pipeline-utility-steps') _
 def gv
-def BRANCH_NAME = env.BRANCH_NAME
+def branch_name = env.branch
 
 pipeline {
     parameters {
