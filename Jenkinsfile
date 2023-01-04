@@ -34,14 +34,14 @@ pipeline {
             }
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    BRANCH_NAME == '*/feature/jenkins-jobs'
                 }
             }
         }
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    BRANCH_NAME == '*/feature/jenkins-jobs'
                 }
             }
             steps {
@@ -54,7 +54,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    BRANCH_NAME == '*/feature/jenkins-jobs'
                 }
             }
             steps {
