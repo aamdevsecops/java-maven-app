@@ -20,6 +20,7 @@ pipeline {
             steps {
                 script {
                     echo "Testing the application for $branch"
+
     
                 }
             }
@@ -29,13 +30,14 @@ pipeline {
         stage('build') {
             steps {
                 script {
+                    print("Branch: ${branch}")
                     gv.buildJar()   
                 }
               
             }
             when {
                 expression {
-                    branch != 'feature/jenkins-jobs'
+                    branch == 'feature/jenkins-jobs'
                 }
             }
         }
