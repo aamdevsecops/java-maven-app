@@ -17,7 +17,7 @@ pipeline {
 
         stage('test') {
             steps {
-                script {BRANCH_NAME_NAME
+                script {
                     echo "Testing the application for $BRANCH_NAME"
 
     
@@ -36,7 +36,7 @@ pipeline {
             }
             when {
                 expression {
-                    env.BRANCH_NAME_NAME == 'feature/jenkins-jobs'
+                    env.BRANCH_NAME == 'feature/jenkins-jobs'
                 }
             }
         }
