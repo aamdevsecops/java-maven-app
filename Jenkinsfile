@@ -1,5 +1,7 @@
+#!/usr/bin/env groovy
+
 def gv
-def BRANCH_NAME
+
 
 pipeline {
     agent any
