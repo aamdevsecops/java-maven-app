@@ -17,7 +17,7 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    echo "Testing the application for $BRANCH_NAME"
+                    echo "Testing the application for $${env.BRANCH_NAME} "
     
                 }
             }
@@ -31,16 +31,16 @@ pipeline {
                 }
               
             }
-            /*when {
+            when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    ${env.BRANCH_NAME}  == 'feature/jenkins-jobs'
                 }
-            } */
+            }
         }
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    ${env.BRANCH_NAME}  == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -53,7 +53,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    "$BRANCH_NAME" == 'feature/jenkins-jobs'
+                    "$${env.BRANCH_NAME} " == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -66,7 +66,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    "$BRANCH_NAME" == '*/feature/jenkins-jobs'
+                    "$${env.BRANCH_NAME} " == '*/feature/jenkins-jobs'
                 }
             }
             steps {
