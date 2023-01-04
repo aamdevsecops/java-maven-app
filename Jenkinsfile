@@ -31,11 +31,11 @@ pipeline {
                 }
               
             }
-            when {
+            /*when {
                 expression {
                     BRANCH_NAME == 'feature/jenkins-jobs'
                 }
-            }
+            } */
         }
         stage("build jar") {
             when {
