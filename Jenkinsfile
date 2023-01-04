@@ -55,7 +55,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs''
+                    BRANCH_NAME == 'feature/jenkins-jobs'
                     echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildImage()"
                 }
             }
