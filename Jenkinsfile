@@ -1,6 +1,5 @@
 def gv
 
-
 pipeline {
     agent any
     tools {
@@ -41,7 +40,7 @@ pipeline {
         stage("build jar") {
             when {
                 expression {
-                    "$BRANCH_NAME" == 'feature/jenkins-jobs'
+                    BRANCH_NAME == 'feature/jenkins-jobs'
                 }
             }
             steps {
