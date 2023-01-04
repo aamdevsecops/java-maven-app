@@ -1,6 +1,6 @@
 def gv
 
-BRANCH_NAME = env.BRANCH_NAME
+branch = env.branch
 
 pipeline {
     agent any
@@ -19,7 +19,7 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    echo "Testing the application for $BRANCH_NAME"
+                    echo "Testing the application for $branch"
     
                 }
             }
@@ -35,14 +35,14 @@ pipeline {
             }
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    branch != 'main'
                 }
             }
         }
         stage("build jar") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    branch == 'main'
                 }
             }
             steps {
@@ -55,7 +55,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    branch == 'main'
                 }
             }
             steps {
@@ -68,7 +68,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
+                    branch == 'main'
                 }
             }
             steps {
@@ -77,14 +77,7 @@ pipeline {
                 }
             }
         }
-        stage('debug') {
-            steps {
-                script {
-                    echo "BRANCH_NAME = $BRANCH_NAME"
-                    echo "branch = $branch"
-                    fail("Debugging stage")
-                }
-            }
-        }
     }   
 }
+
+
