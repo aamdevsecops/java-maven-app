@@ -1,6 +1,10 @@
 def gv
+def BRANCH_NAME = env.BRANCH_NAME
 
 pipeline {
+    parametrs {
+        string(name: 'branch', defaultValue: BRANCH_NAME)
+    }
     agent any
     tools {
         maven 'maven-3.8'
