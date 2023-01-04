@@ -35,14 +35,14 @@ pipeline {
             }
             when {
                 expression {
-                    branch != 'main'
+                    branch != 'feature/jenkins-jobs'
                 }
             }
         }
         stage("build jar") {
             when {
                 expression {
-                    branch == 'main'
+                    branch == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -55,7 +55,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    branch == 'main'
+                    branch == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -68,7 +68,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    branch == 'main'
+                    branch == 'feature/jenkins-jobs'
                 }
             }
             steps {
