@@ -1,10 +1,3 @@
-#!/usr/bin/env groovy
-
-
-import jenkins.model.*
-jenkins = Jenkins.instance
-
-
 def gv
 
 
@@ -41,16 +34,14 @@ pipeline {
             }
             when {
                 expression {
-                    env.BRANCH_NAME == 'feature/jenkins-jobs'
-                    echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildJar()"
+                    BRANCH_NAME == 'feature/jenkins-jobs'
                 }
             }
         }
         stage("build jar") {
             when {
                 expression {
-                    env.BRANCH_NAME == 'feature/jenkins-jobs'
-                    echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildJar()"
+                    "$BRANCH_NAME" == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -63,8 +54,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    BRANCH_NAME == 'feature/jenkins-jobs'
-                    echo "since $BRANCH_NAME conditioned by when condition, we are not building anything on gv.buildImage()"
+                    "$BRANCH_NAME" == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -77,7 +67,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    BRANCH_NAME == '*/feature/jenkins-jobs'
+                    "$BRANCH_NAME" == '*/feature/jenkins-jobs'
                 }
             }
             steps {
