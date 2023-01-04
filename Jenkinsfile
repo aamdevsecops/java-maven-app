@@ -2,7 +2,7 @@ def gv
 def BRANCH_NAME = env.BRANCH_NAME
 
 pipeline {
-    parametrs {
+    parameters {
         string(name: 'branch', defaultValue: BRANCH_NAME)
     }
     agent any
