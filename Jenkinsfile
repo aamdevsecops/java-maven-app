@@ -67,7 +67,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    BRANCH_NAME == '*/feature/jenkins-jobs'
+                    BRANCH_NAME == 'feature/jenkins-jobs'
                 }
             }
             steps {
