@@ -77,5 +77,14 @@ pipeline {
                 }
             }
         }
+        stage('debug') {
+            steps {
+                script {
+                    echo "BRANCH_NAME = $BRANCH_NAME"
+                    echo "branch = $branch"
+                    fail("Debugging stage")
+                }
+            }
+        }
     }   
 }
