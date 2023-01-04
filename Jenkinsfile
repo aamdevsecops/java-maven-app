@@ -1,4 +1,5 @@
 def gv
+def BRANCH_NAME
 
 pipeline {
     agent any
@@ -69,7 +70,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    BRANCH_NAME == ['main', 'feature/jenkins-jobs']
+                    BRANCH_NAME == 'feature/jenkins-jobs'
                 }
             }
             steps {
