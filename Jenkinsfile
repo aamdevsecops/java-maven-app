@@ -1,5 +1,4 @@
 def gv
-def branch
 
 pipeline {
     agent any
