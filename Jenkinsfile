@@ -36,7 +36,7 @@ pipeline {
             }
             when {
                 expression {
-                    env.BRANCH_NAME == 'feature/jenkins-jobs'
+                    env.GIT_BRANCH == 'feature/jenkins-jobs'
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
         stage("build image") {
             when {
                 expression {
-                    env.BRANCH_NAME == 'feature/jenkins-jobs'
+                    env.GIT_BRANCH == 'feature/jenkins-jobs'
                 }
             }
             steps {
@@ -57,7 +57,7 @@ pipeline {
         stage('deploy') {
             when {
                 expression {
-                    env.BRANCH_NAME == 'feature/jenkins-jobs'
+                    env.GIT_BRANCH == 'feature/jenkins-jobs'
                 }
             }
             steps {
