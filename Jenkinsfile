@@ -1,7 +1,5 @@
 def gv
 
-branch = env.branch
-
 pipeline {
     agent any
     tools {
