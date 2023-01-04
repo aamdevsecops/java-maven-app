@@ -20,8 +20,8 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    echo "Testing the application..."
-                    echo "Executing pipeline for $BRANCH_NAME"
+                    echo "Testing the application for $BRANCH_NAME""
+    
                 }
             }
 
